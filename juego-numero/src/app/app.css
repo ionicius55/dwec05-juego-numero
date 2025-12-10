@@ -1,0 +1,56 @@
+.contenedor {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.campo {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 4px 6px;
+}
+
+button {
+  margin-top: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.feedback {
+  font-size: 0.85rem;
+  min-height: 1.2em; /* “campo de texto oculto” cuando está vacío */
+}
+
+.feedback.error {
+  color: red;
+}
+
+.feedback.ok {
+  color: green;
+}
+
+.juego {
+  margin-top: 24px;
+  border-top: 1px solid #ccc;
+  padding-top: 16px;
+}
+
+.bienvenida {
+  font-weight: bold;
+}
+
+.feedback-juego {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}

@@ -1,0 +1,127 @@
+<div class="contenedor">
+
+  <h1>Juego de adivinar el número</h1>
+
+  <!-- EJERCICIO 1: FORMULARIO DE CONFIGURACIÓN -->
+
+  <h2>Configuración del juego</h2>
+
+  <form>
+
+    <!-- Nombre -->
+    <div class="campo">
+      <label for="nombre">Nombre:</label>
+      <input
+        id="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        name="nombre"
+        (keyup)="validarNombre()"
+        (blur)="validarNombre()"
+        [disabled]="juegoIniciado"
+      />
+      <div class="feedback" [ngClass]="{ error: !nombreValido, ok: nombreValido }">
+        {{ msgNombre }}
+      </div>
+    </div>
+
+    <!-- Apellido -->
+    <div class="campo">
+      <label for="apellido">Apellido:</label>
+      <input
+        id="apellido"
+        type="text"
+        [(ngModel)]="apellido"
+        name="apellido"
+        (keyup)="validarApellido()"
+        (blur)="validarApellido()"
+        [disabled]="juegoIniciado"
+      />
+      <div class="feedback" [ngClass]="{ error: !apellidoValido, ok: apellidoValido }">
+        {{ msgApellido }}
+      </div>
+    </div>
+
+    <!-- Rango máximo -->
+    <div class="campo">
+      <label for="rango">Rango máximo del número (mínimo 4):</label>
+      <input
+        id="rango"
+        type="number"
+        [(ngModel)]="rangoMaximo"
+        name="rangoMaximo"
+        (keyup)="validarRango()"
+        (blur)="validarRango()"
+        [disabled]="juegoIniciado"
+      />
+      <div class="feedback" [ngClass]="{ error: !rangoValido, ok: rangoValido }">
+        {{ msgRango }}
+      </div>
+    </div>
+
+    <!-- Número de intentos -->
+    <div class="campo">
+      <label for="intentos">Número de intentos:</label>
+      <input
+        id="intentos"
+        type="number"
+        [(ngModel)]="maxIntentos"
+        name="maxIntentos"
+        (keyup)="validarIntentos()"
+        (blur)="validarIntentos()"
+        [disabled]="juegoIniciado"
+      />
+      <div class="feedback" [ngClass]="{ error: !intentosValidos, ok: intentosValidos }">
+        {{ msgIntentos }}
+      </div>
+    </div>
+
+    <!-- Botón Recoger Datos -->
+    <button
+      type="button"
+      (click)="recogerDatos()"
+      [disabled]="!puedeRecogerDatos || juegoIniciado"
+    >
+      Recoger datos
+    </button>
+
+  </form>
+
+  <!-- EJERCICIO 2: JUEGO -->
+
+  <div *ngIf="juegoIniciado" class="juego">
+
+    <h2>Juego</h2>
+
+    <p class="bienvenida">
+      Ongi Etorri {{ configuracion.nombre }} {{ configuracion.apellido }}.
+    </p>
+
+    <p>Intentos restantes: {{ intentosRestantes }}</p>
+
+    <div class="campo">
+      <label for="intentoUsuario">Introduce tu número:</label>
+      <input
+        id="intentoUsuario"
+        type="number"
+        [(ngModel)]="intentoUsuario"
+        name="intentoUsuario"
+        [disabled]="intentosRestantes <= 0 || haGanado"
+      />
+    </div>
+
+    <button
+      type="button"
+      (click)="enviarIntento()"
+      [disabled]="intentoUsuario == null || intentosRestantes <= 0 || haGanado"
+    >
+      Enviar
+    </button>
+
+    <div class="feedback-juego">
+      {{ mensajeJuego }}
+    </div>
+
+  </div>
+
+</div>
